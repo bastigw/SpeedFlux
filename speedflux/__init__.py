@@ -1,4 +1,4 @@
-from speedflux import config, logs, influx
+from speedflux import config, influx, logs
 
 # Speedflux
 CONFIG = None
@@ -15,12 +15,12 @@ def initialize():
     try:
         CONFIG = config.Config()
     except Exception as err:
-        raise SystemExit("Unable to initialize SpeedFlux", err)
+        raise SystemExit("Unable to initialize SpeedFlux", err) from err
     try:
         LOG = logs.Log(CONFIG)
     except Exception as err:
-        raise SystemExit("Couldn't initiate logging", err)
+        raise SystemExit("Couldn't initiate logging", err) from err
     try:
         INFLUXDB = influx.Influx(CONFIG)
     except Exception as err:
-        raise SystemExit("Couldn't initiate InfluxDB <2", err)
+        raise SystemExit("Couldn't initiate InfluxDB <2", err) from err
